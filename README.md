@@ -12,7 +12,7 @@ Ruby Arguments encapsulate method positional arguments (`args`), keyword argumen
 
 That may be useful for DSLs, caches, callbacks, custom RSpec matchers, hash keys, pattern matching and so on.
 
-The initial Ruby Arguments implementation was extracted from the [Convenient Service](https://github.com/marian13/convenient_service). Search for `Support`
+The initial Ruby Arguments implementation was extracted from the [Convenient Service](https://github.com/marian13/convenient_service).
 
 ## TL;DR
 
