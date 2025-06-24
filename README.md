@@ -61,7 +61,7 @@ arguments.present?
 # => true
 
 arguments.blank?
-# => true
+# => false
 
 arguments[0]
 # => :foo
