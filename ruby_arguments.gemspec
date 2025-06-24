@@ -21,6 +21,4 @@ Gem::Specification.new do |spec|
   spec.files = ::Dir["LICENSE.txt", "README.md", "lib/**/*"]
 
   spec.require_paths = ["lib"]
-
-  spec.add_dependency "base64"
 end
