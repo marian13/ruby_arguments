@@ -287,7 +287,7 @@ RSpec.describe RubyArguments do
         end
 
         context "when `other` has different `kwargs`" do
-          let(:other) { described_class.new(*args, {bar: :baz}, &block) }
+          let(:other) { described_class.new(*args, bar: :baz, &block) }
 
           it "returns `false`" do
             expect(arguments == other).to eq(false)
@@ -308,6 +308,65 @@ RSpec.describe RubyArguments do
 
           it "returns `true`" do
             expect(arguments == other).to eq(true)
+          end
+        end
+      end
+
+      describe "#eql?" do
+        subject(:arguments) { described_class.new(*args, **kwargs, &block) }
+
+        context "when `other` has different class" do
+          let(:other) { 42 }
+
+          it "returns `false`" do
+            expect(arguments.eql?(other)).to be_nil
+          end
+        end
+
+        context "when `other` has different `args`" do
+          let(:other) { described_class.new(:bar, **kwargs, &block) }
+
+          it "returns `false`" do
+            expect(arguments.eql?(other)).to eq(false)
+          end
+        end
+
+        context "when `other` has different `kwargs`" do
+          let(:other) { described_class.new(*args, bar: :baz, &block) }
+
+          it "returns `false`" do
+            expect(arguments.eql?(other)).to eq(false)
+          end
+        end
+
+        context "when `other` has different `block`" do
+          let(:other) { described_class.new(*args, **kwargs, &other_block) }
+          let(:other_block) { proc { :bar } }
+
+          it "returns `false`" do
+            expect(arguments.eql?(other)).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { described_class.new(*args, **kwargs, &block) }
+
+          it "returns `true`" do
+            expect(arguments.eql?(other)).to eq(true)
+          end
+        end
+      end
+
+      describe "#hash" do
+        it "returns hash based on class, `args`, `kwargs`, and `block`" do
+          expect(arguments.hash).to eq([described_class, args, kwargs, block].hash)
+        end
+
+        context "when `block` in `nil`" do
+          let(:block) { nil }
+
+          it "uses `nil` hash for `block`" do
+            expect(arguments.hash).to eq([described_class, args, kwargs, nil].hash)
           end
         end
       end
@@ -351,6 +410,12 @@ RSpec.describe RubyArguments do
               expect(arguments.deconstruct_keys([:block])).to eq({block: block})
             end
           end
+
+          context "when `keys` is array with unsupported key" do
+            it "returns empty hash" do
+              expect(arguments.deconstruct_keys([:unsupported])).to eq({})
+            end
+          end
         end
 
         context "when `keys` is array with multiple keys" do
@@ -365,6 +430,137 @@ RSpec.describe RubyArguments do
       context "when `keys` is `nil`" do
         it "returns hash with all possible keys" do
           expect(arguments.deconstruct_keys(nil)).to eq({args: args, kwargs: kwargs, block: block})
+        end
+      end
+    end
+  end
+
+  example_group "usage" do
+    context "when used as hash keys" do
+      let(:map) { {} }
+
+      let(:value) { :foo }
+
+      let(:command) do
+        map[arguments] = value
+        map[other_arguments] = value
+      end
+
+      context "when those keys do NOT cause collision (calling `#hash` returns different numbers)" do
+        let(:arguments) { described_class.new(:foo) }
+        let(:other_arguments) { described_class.new(:bar) }
+
+        specify do
+          allow(arguments).to receive(:hash).and_call_original
+
+          command
+
+          expect(arguments).to have_received(:hash)
+        end
+
+        specify do
+          allow(other_arguments).to receive(:hash).and_call_original
+
+          command
+
+          expect(other_arguments).to have_received(:hash)
+        end
+
+        specify do
+          allow(arguments).to receive(:eql?).and_call_original
+
+          command
+
+          expect(arguments).not_to have_received(:eql?)
+        end
+
+        specify do
+          allow(other_arguments).to receive(:eql?).and_call_original
+
+          command
+
+          expect(other_arguments).not_to have_received(:eql?), "Flaky collision found: arguments.object_id - `#{arguments.object_id}`, other_arguments.object_id - `#{other_arguments.object_id}`, arguments.hash - `#{arguments.hash}`, other_arguments.hash - `#{other_arguments.hash}`."
+        end
+      end
+
+      context "when those keys cause collision (calling `#hash` returns same numbers)" do
+        let(:arguments) { described_class.new(:foo) }
+        let(:other_arguments) { described_class.new(:foo) }
+
+        specify do
+          allow(arguments).to receive(:hash).and_call_original
+
+          command
+
+          expect(arguments).to have_received(:hash)
+        end
+
+        specify do
+          allow(other_arguments).to receive(:hash).and_call_original
+
+          command
+
+          expect(other_arguments).to have_received(:hash)
+        end
+
+        specify do
+          allow(arguments).to receive(:eql?).and_call_original
+
+          command
+
+          expect(arguments).not_to have_received(:eql?)
+        end
+
+        specify do
+          allow(other_arguments).to receive(:eql?).and_call_original
+
+          command
+
+          expect(other_arguments).to have_received(:eql?)
+        end
+
+        context "when those keys are NOT equal in `#eql?` terms" do
+          let(:collision_hash) { 42 }
+
+          before do
+            allow(arguments).to receive(:hash).and_return(collision_hash)
+            allow(other_arguments).to receive(:hash).and_return(collision_hash)
+          end
+
+          context "when `#eql?` returns `nil`" do
+            let(:arguments) { described_class.new(:foo) }
+            let(:other_arguments) { Object.new }
+
+            it "considers other key that caused collision as separate key" do
+              command
+
+              expect(map.keys.size).to eq(2)
+            end
+          end
+
+          context "when `#eql?` returns `false`" do
+            let(:arguments) { described_class.new(:foo) }
+            let(:other_arguments) { described_class.new(:bar) }
+
+            it "considers other key that caused collision as separate key" do
+              command
+
+              expect(map.keys.size).to eq(2)
+            end
+          end
+        end
+
+        context "when those keys are equal in `#eql?` terms" do
+          context "when `#eql?` returns `true`" do
+            let(:arguments) { described_class.new(:foo) }
+            let(:other_arguments) { described_class.new(:foo) }
+
+            it "considers other key that caused collision as same key" do
+              command
+
+              expect(map.keys.size).to eq(1)
+            end
+          end
         end
       end
     end

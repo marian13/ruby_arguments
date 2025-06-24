@@ -157,7 +157,7 @@ class RubyArguments
 
   ##
   # @api public
-  # @param other [Object]
+  # @param other [Object] Can be any type.
   # @return [Boolean, nil]
   #
   def ==(other)
@@ -172,10 +172,30 @@ class RubyArguments
 
   ##
   # @api public
+  # @param other [Object] Can be any type.
+  # @return [Boolean, nil]
+  #
+  def eql?(other)
+    return unless other.instance_of?(self.class)
+
+    return false if args != other.args
+    return false if kwargs != other.kwargs
+    return false if block != other.block
+
+    true
+  end
+
+  ##
+  # @api public
+  # @return [Integer]
+  #
+  def hash
+    [self.class, args, kwargs, block].hash
+  end
+
+  ##
+  # @api public
   # @return [Array]
-  # @note https://zverok.space/blog/2022-12-20-pattern-matching.html
-  # @note https://ruby-doc.org/core-2.7.2/doc/syntax/pattern_matching_rdoc.html
-  # @note Expected to be called only from pattern matching. Avoid direct usage of this method.
   #
   def deconstruct
     [args, kwargs, block]
@@ -185,9 +205,6 @@ class RubyArguments
   # @api public
   # @param keys [Array<Symbol>, nil]
   # @return [Hash]
-  # @note https://zverok.space/blog/2022-12-20-pattern-matching.html
-  # @note https://ruby-doc.org/core-2.7.2/doc/syntax/pattern_matching_rdoc.html
-  # @note Expected to be called only from pattern matching. Avoid direct usage of this method.
   #
   def deconstruct_keys(keys)
     keys ||= [:args, :kwargs, :block]
