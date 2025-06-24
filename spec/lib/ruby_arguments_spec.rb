@@ -39,6 +39,16 @@ RSpec.describe RubyArguments do
         end
       end
     end
+
+    describe "#null_arguments" do
+      it "returns `RubyArguments::NullArguments` instance" do
+        expect(RubyArguments.null_arguments).to be_instance_of(RubyArguments::NullArguments)
+      end
+
+      it "caches its value" do
+        expect(RubyArguments.null_arguments.object_id).to eq(RubyArguments.null_arguments.object_id)
+      end
+    end
   end
 
   example_group "instance methods" do
