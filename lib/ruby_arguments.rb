@@ -119,6 +119,30 @@ class RubyArguments
 
   ##
   # @api public
+  # @return [Booleam]
+  #
+  def empty?
+    none?
+  end
+
+  ##
+  # @api public
+  # @return [Booleam]
+  #
+  def present?
+    any?
+  end
+
+  ##
+  # @api public
+  # @return [Booleam]
+  #
+  def blank?
+    none?
+  end
+
+  ##
+  # @api public
   # @param key [Integer, Symbol]
   # @return [Object] Can be any type.
   # @raise [RubyArguments::Exceptions::InvalidKeyType]

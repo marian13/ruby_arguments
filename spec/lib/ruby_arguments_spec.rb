@@ -116,6 +116,108 @@ RSpec.describe RubyArguments do
       end
     end
 
+    describe "#empty?" do
+      context "when arguments have at least one arg" do
+        let(:arguments) { described_class.new(*args) }
+
+        it "returns `false`" do
+          expect(arguments.empty?).to eq(false)
+        end
+      end
+
+      context "when arguments have at least one kwarg" do
+        let(:arguments) { described_class.new(**kwargs) }
+
+        it "returns `false`" do
+          expect(arguments.empty?).to eq(false)
+        end
+      end
+
+      context "when arguments have at block" do
+        let(:arguments) { described_class.new(&block) }
+
+        it "returns `false`" do
+          expect(arguments.empty?).to eq(false)
+        end
+      end
+
+      context "when arguments do NOT have args, kwargs and block" do
+        let(:arguments) { described_class.new }
+
+        it "returns `true`" do
+          expect(arguments.empty?).to eq(true)
+        end
+      end
+    end
+
+    describe "#present?" do
+      context "when arguments have at least one arg" do
+        let(:arguments) { described_class.new(*args) }
+
+        it "returns `true`" do
+          expect(arguments.present?).to eq(true)
+        end
+      end
+
+      context "when arguments have at least one kwarg" do
+        let(:arguments) { described_class.new(**kwargs) }
+
+        it "returns `true`" do
+          expect(arguments.present?).to eq(true)
+        end
+      end
+
+      context "when arguments have block" do
+        let(:arguments) { described_class.new(&block) }
+
+        it "returns `true`" do
+          expect(arguments.present?).to eq(true)
+        end
+      end
+
+      context "when arguments do NOT have args, kwargs and block" do
+        let(:arguments) { described_class.new }
+
+        it "returns `false`" do
+          expect(arguments.present?).to eq(false)
+        end
+      end
+    end
+
+    describe "#blank?" do
+      context "when arguments have at least one arg" do
+        let(:arguments) { described_class.new(*args) }
+
+        it "returns `false`" do
+          expect(arguments.blank?).to eq(false)
+        end
+      end
+
+      context "when arguments have at least one kwarg" do
+        let(:arguments) { described_class.new(**kwargs) }
+
+        it "returns `false`" do
+          expect(arguments.blank?).to eq(false)
+        end
+      end
+
+      context "when arguments have at block" do
+        let(:arguments) { described_class.new(&block) }
+
+        it "returns `false`" do
+          expect(arguments.blank?).to eq(false)
+        end
+      end
+
+      context "when arguments do NOT have args, kwargs and block" do
+        let(:arguments) { described_class.new }
+
+        it "returns `true`" do
+          expect(arguments.blank?).to eq(true)
+        end
+      end
+    end
+
     describe "#[]" do
       context "when `key` is NOT valid" do
         let(:key) { "abc" }
