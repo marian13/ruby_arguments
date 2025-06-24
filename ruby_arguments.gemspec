@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Marian Kostyk"]
   spec.email = ["mariankostyk13895@gmail.com"]
 
-  spec.summary = "TODO"
-  spec.description = "TODO"
+  spec.summary = "Ruby Arguments encapsulate method positional arguments (args), keyword arguments (kwargs), and an optional block (block) in a single value object (null object is also available)."
+  spec.description = "Ruby Arguments encapsulate method positional arguments (args), keyword arguments (kwargs), and an optional block (block) in a single value object (null object is also available)."
   spec.homepage = "https://github.com/marian13/ruby_arguments"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.4.0"
