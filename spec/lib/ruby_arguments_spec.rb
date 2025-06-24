@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license MIT <https://opensource.org/license/mit>
+##
+
 RSpec.describe RubyArguments do
   let(:arguments) { described_class.new(*args, **kwargs, &block) }
 

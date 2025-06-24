@@ -1,3 +1,6 @@
+<!-- AUTHOR: Marian Kostyk <mariankostyk13895@gmail.com> -->
+<!-- LICENSE: MIT <https://opensource.org/license/mit> -->
+
 # Ruby Arguments
 
 [![Ruby](https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white)](https://www.ruby-lang.org/en/)
@@ -111,3 +114,7 @@ Execute the command below:
 ```bash
 gem install ruby_arguments
 ```
+
+---
+
+Copyright (c) 2025 Marian Kostyk.
