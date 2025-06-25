@@ -7,11 +7,23 @@
 
 require_relative "ruby_arguments/version"
 
+##
+# @api public
+# @since 1.0.0
+#
 class RubyArguments
   module Exceptions
+    ##
+    # @api public
+    # @since 1.0.0
+    #
     class Base < ::StandardError
     end
 
+    ##
+    # @api public
+    # @since 1.0.0
+    #
     class InvalidKeyType < Base
       class << self
         ##
@@ -32,6 +44,10 @@ class RubyArguments
     end
   end
 
+  ##
+  # @api public
+  # @since 1.0.0
+  #
   class NullArguments < ::RubyArguments
     ##
     # @api private
@@ -45,6 +61,7 @@ class RubyArguments
 
     ##
     # @api public
+    # @since 1.0.0
     # @return [Boolean]
     #
     def null_arguments?
@@ -54,6 +71,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @!attribute [r] args
   #   @return [Array<Object>]
   #
@@ -61,6 +79,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @!attribute [r] kwargs
   #   @return [Hash{Symbol => Object}]
   #
@@ -68,6 +87,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @!attribute [r] block
   #   @return [Proc, nil]
   #
@@ -75,6 +95,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @param args [Array<Object>]
   # @param kwargs [Hash{Symbol => Object}]
   # @param block [Proc, nil]
@@ -89,6 +110,7 @@ class RubyArguments
   class << self
     ##
     # @api public
+    # @since 1.0.0
     # @return [RubyArguments::NullArguments]
     #
     def null_arguments
@@ -98,6 +120,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @return [Boolean]
   #
   def null_arguments?
@@ -106,6 +129,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @return [Booleam]
   #
   def any?
@@ -118,6 +142,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @return [Booleam]
   #
   def none?
@@ -126,6 +151,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @return [Booleam]
   #
   def empty?
@@ -134,6 +160,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @return [Booleam]
   #
   def present?
@@ -142,6 +169,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @return [Booleam]
   #
   def blank?
@@ -150,6 +178,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @param key [Integer, Symbol]
   # @return [Object] Can be any type.
   # @raise [RubyArguments::Exceptions::InvalidKeyType]
@@ -164,6 +193,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @param other [Object] Can be any type.
   # @return [Boolean, nil]
   #
@@ -179,6 +209,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @param other [Object] Can be any type.
   # @return [Boolean, nil]
   #
@@ -194,6 +225,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @return [Integer]
   #
   def hash
@@ -202,6 +234,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @return [Array]
   #
   def deconstruct
@@ -210,6 +243,7 @@ class RubyArguments
 
   ##
   # @api public
+  # @since 1.0.0
   # @param keys [Array<Symbol>, nil]
   # @return [Hash]
   #

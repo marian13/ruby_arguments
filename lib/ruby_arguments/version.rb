@@ -6,5 +6,10 @@
 ##
 
 class RubyArguments
+  ##
+  # @api public
+  # @since 1.0.0
+  # @return [String]
+  #
   VERSION = "1.0.0"
 end
