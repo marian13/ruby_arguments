@@ -5,6 +5,8 @@
 # @license MIT <https://opensource.org/license/mit>
 ##
 
+require_relative "ruby_arguments/version"
+
 class RubyArguments
   module Exceptions
     class Base < ::StandardError

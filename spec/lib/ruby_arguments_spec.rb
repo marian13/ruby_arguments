@@ -12,6 +12,18 @@ RSpec.describe RubyArguments do
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
+  example_group "constants" do
+    describe "::VERSION" do
+      it "returns version" do
+        expect(described_class::VERSION).to be_instance_of(String)
+      end
+
+      it "follows Semantic Versioning" do
+        expect(described_class::VERSION).to match(/\d+\.\d+\.\d+/)
+      end
+    end
+  end
+
   example_group "attributes" do
     specify { expect(arguments.args).to eq(args) }
     specify { expect(arguments.kwargs).to eq(kwargs) }
