@@ -66,12 +66,28 @@ RSpec.describe RubyArguments do
         expect(RubyArguments.null_arguments.object_id).to eq(RubyArguments.null_arguments.object_id)
       end
     end
+
+    describe "#nil_arguments" do
+      it "returns `RubyArguments::NullArguments` instance" do
+        expect(RubyArguments.nil_arguments).to be_instance_of(RubyArguments::NullArguments)
+      end
+
+      it "caches its value" do
+        expect(RubyArguments.nil_arguments.object_id).to eq(RubyArguments.nil_arguments.object_id)
+      end
+    end
   end
 
   example_group "instance methods" do
     describe "#null_arguments?" do
       it "returns `false`" do
         expect(arguments.null_arguments?).to eq(false)
+      end
+    end
+
+    describe "#nil_arguments?" do
+      it "returns `false`" do
+        expect(arguments.nil_arguments?).to eq(false)
       end
     end
 
@@ -618,6 +634,12 @@ RSpec.describe RubyArguments::NullArguments do
     describe "#null_arguments?" do
       it "returns `true`" do
         expect(null_arguments.null_arguments?).to eq(true)
+      end
+    end
+
+    describe "#nil_arguments?" do
+      it "returns `true`" do
+        expect(null_arguments.nil_arguments?).to eq(true)
       end
     end
   end

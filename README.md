@@ -8,7 +8,7 @@
 [![Gem Version](https://badge.fury.io/rb/ruby_arguments.svg)](https://rubygems.org/gems/ruby_arguments) [![Gem Downloads](https://img.shields.io/gem/dt/ruby_arguments.svg)](https://rubygems.org/gems/ruby_arguments)  ![GitHub repo size](https://img.shields.io/github/repo-size/marian13/ruby_arguments) [![GitHub Actions CI](https://github.com/marian13/ruby_arguments/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/marian13/ruby_arguments/actions/workflows/ci.yml) [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard) [![Coverage Status](https://coveralls.io/repos/github/marian13/ruby_arguments/badge.svg)](https://coveralls.io/github/marian13/ruby_arguments?branch=main) [![yard docs](http://img.shields.io/badge/yard-docs-blue.svg)](https://marian13.github.io/ruby_arguments)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Ruby Arguments encapsulate method positional arguments (`args`), keyword arguments (`kwargs`), and an optional block (`block`) in a single value object (null object is also available).
+Ruby Arguments encapsulate method positional arguments (`args`), keyword arguments (`kwargs`), and an optional block (`block`) in a single value object ([null object](https://refactoring.guru/introduce-null-object) is also available).
 
 That may be useful for DSLs, caches, callbacks, custom RSpec matchers, hash keys, pattern matching and so on.
 
@@ -45,7 +45,7 @@ arguments.kwargs
 arguments.block
 # => #<Proc:0x000000012a97fc18>
 
-arguments.null_arguments?
+arguments.null_arguments? # Or an alias `arguments.nil_arguments?`.
 # => false
 
 arguments.any?

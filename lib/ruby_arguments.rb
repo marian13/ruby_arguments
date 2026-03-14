@@ -67,6 +67,16 @@ class RubyArguments
     def null_arguments?
       true
     end
+
+    ##
+    # @api public
+    # @since 1.1.0
+    # @return [Boolean]
+    #
+    # @note Original pattern is called Null Object. Since Ruby has `nil` instead of `null` this alias is introduced.
+    # @see https://refactoring.guru/introduce-null-object
+    #
+    alias_method :nil_arguments?, :null_arguments?
   end
 
   ##
@@ -116,6 +126,16 @@ class RubyArguments
     def null_arguments
       @null_arguments ||= ::RubyArguments::NullArguments.new
     end
+
+    ##
+    # @api public
+    # @since 1.1.0
+    # @return [RubyArguments::NullArguments]
+    #
+    # @note Original pattern is called Null Object. Since Ruby has `nil` instead of `null` this alias is introduced.
+    # @see https://refactoring.guru/introduce-null-object
+    #
+    alias_method :nil_arguments, :null_arguments
   end
 
   ##
@@ -126,6 +146,16 @@ class RubyArguments
   def null_arguments?
     false
   end
+
+  ##
+  # @api public
+  # @since 1.1.0
+  # @return [Boolean]
+  #
+  # @note Original pattern is called Null Object. Since Ruby has `nil` instead of `null` this alias is introduced.
+  # @see https://refactoring.guru/introduce-null-object
+  #
+  alias_method :nil_arguments?, :null_arguments?
 
   ##
   # @api public
