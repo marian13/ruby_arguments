@@ -12,3 +12,5 @@ gem "webmock"
 gem "irb"
 
 gem "gem-release"
+
+gem "psych", "~> 4.0" # TruffleRuby 23 does not work with Psych 5 yet.
