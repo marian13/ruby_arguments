@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -63,7 +63,7 @@
 <p><a href="https://www.ruby-lang.org/en/"><img src="https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&amp;logo=ruby&amp;logoColor=white" alt="Ruby" /></a></p>
 <p><a href="https://rubygems.org/gems/ruby_arguments"><img src="https://badge.fury.io/rb/ruby_arguments.svg" alt="Gem Version" /></a> <a href="https://rubygems.org/gems/ruby_arguments"><img src="https://img.shields.io/gem/dt/ruby_arguments.svg" alt="Gem Downloads" /></a>  <img src="https://img.shields.io/github/repo-size/marian13/ruby_arguments" alt="GitHub repo size" /> <a href="https://github.com/marian13/ruby_arguments/actions/workflows/ci.yml"><img src="https://github.com/marian13/ruby_arguments/actions/workflows/ci.yml/badge.svg?branch=main" alt="GitHub Actions CI" /></a> <a href="https://github.com/testdouble/standard"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Ruby Style Guide" /></a> <a href="https://coveralls.io/github/marian13/ruby_arguments?branch=main"><img src="https://coveralls.io/repos/github/marian13/ruby_arguments/badge.svg" alt="Coverage Status" /></a> <a href="https://marian13.github.io/ruby_arguments"><img src="http://img.shields.io/badge/yard-docs-blue.svg" alt="yard docs" /></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a></p>
-<p>Ruby Arguments encapsulate method positional arguments (<code>args</code>), keyword arguments (<code>kwargs</code>), and an optional block (<code>block</code>) in a single value object (null object is also available).</p>
+<p>Ruby Arguments encapsulate method positional arguments (<code>args</code>), keyword arguments (<code>kwargs</code>), and an optional block (<code>block</code>) in a single value object (<a href="https://refactoring.guru/introduce-null-object">null object</a> is also available).</p>
 <p>That may be useful for DSLs, caches, callbacks, custom RSpec matchers, hash keys, pattern matching and so on.</p>
 <p>The initial Ruby Arguments implementation was extracted from the <a href="https://github.com/marian13/convenient_service">Convenient Service</a>.</p>
 <h2>TL;DR</h2>
@@ -95,7 +95,7 @@ arguments.kwargs
 arguments.block
 # =&gt; #&lt;Proc:0x000000012a97fc18&gt;
 
-arguments.null_arguments?
+arguments.null_arguments? # Or an alias `arguments.nil_arguments?`.
 # =&gt; false
 
 arguments.any?
@@ -153,13 +153,13 @@ arguments in args:, kwargs:, :block
 <pre class="code bash"><code class="bash">gem install ruby_arguments
 </code></pre>
 <hr />
-<p>Copyright (c) 2025 Marian Kostyk.</p>
+<p>Copyright (c) 2025-2026 Marian Kostyk.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Wed Jun 25 01:06:19 2025 by
+  Generated on Sat Mar 14 17:24:35 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.4.4).
+  0.9.38 (ruby-3.4.9).
 </div>
 
     </div>
