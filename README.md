@@ -117,4 +117,4 @@ gem install ruby_arguments
 
 ---
 
-Copyright (c) 2025 Marian Kostyk.
+Copyright (c) 2025-2026 Marian Kostyk.
